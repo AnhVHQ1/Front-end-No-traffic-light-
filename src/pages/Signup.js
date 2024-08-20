@@ -55,9 +55,7 @@ const Signup = () => {
   useEffect(() => {
     if (isSuccess) {
       navigate("/login");
-    } else {
-      navigate("/register");
-    }
+    } 
   }, [user, isError, isSuccess, isLoading]);
 
 

@@ -4,6 +4,7 @@ import Meta from "../components/Meta";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { MdDelete } from "react-icons/md";
 import {
   deleteProductCart,
   getUserCart,
@@ -54,6 +55,7 @@ const Cart = () => {
                   <h4 className="cart-col-2">Price</h4>
                   <h4 className="cart-col-3">Quantity</h4>
                   <h4 className="cart-col-4">Total</h4>
+                  <h4 className="cart-col-5">Delete</h4>
                 </div>
               ) : (
                 <p className="text-center" style={{ color: "gray" }}>
@@ -68,7 +70,8 @@ const Cart = () => {
                       className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center"
                       key={index}
                     >
-                      <div className="cart-col-1 gap-15 d-flex align-items-center">
+                      <Link
+                        to={"/product/" + item?.productId?._id} className="cart-col-1 gap-15 d-flex align-items-center">
                         <div className="w-25">
                           <img
                             className="img-fluid"
@@ -90,31 +93,40 @@ const Cart = () => {
                             {item?.productId?.nutrition.servingSize}
                           </p>
                         </div>
-                      </div>
+                      </Link>
                       <div className="cart-col-2">
                         <h5 className="price">${item?.productId?.price}</h5>
                       </div>
-                      <div className="cart-col-3 d-flex align-items-center gap-15">
+                      <div className="cart-col-3">
+                        <p>{item?.quantity}</p>
                         <div>
-                          <input
+                          {/* <input
                             className="form-control"
                             type="number"
                             min={1}
                             max={10}
                             value={item?.quantity}
-                          />
+                          /> */}
                         </div>
-                        <div>
+                        {/* <div>
                           <AiFillDelete
                             onClick={() => deleteACartProduct(item?._id)}
                             size={"1.5em"}
                           />
-                        </div>
+                        </div> */}
                       </div>
                       <div className="cart-col-4">
                         <h5 className="price">
                           ${item?.productId?.price * item?.quantity}
                         </h5>
+                      </div>
+                      <div className="cart-col-5">
+                        <div className="delete-btn">
+                          <MdDelete
+                            onClick={() => deleteACartProduct(item?._id)}
+                            size={"1.5em"}
+                          />
+                        </div>
                       </div>
                     </div>
                   );
